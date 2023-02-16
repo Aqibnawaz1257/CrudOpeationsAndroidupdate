@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:padding="10dp"
+    android:layout_height="match_parent"
+    tools:context=".Login_page">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login Page"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the email"
+        android:id="@+id/loginemail"
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edtbackground"
+        android:padding="10dp"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginpass"
+        android:hint="Enter the password"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edtbackground"
+        android:padding="10dp"
+
+        />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_login"
+        android:backgroundTint="#4CAF50"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create an account ? Signup"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:onClick="regg"
+        android:textColor="#777777"
+        />
+
+
+
+</LinearLayout>
