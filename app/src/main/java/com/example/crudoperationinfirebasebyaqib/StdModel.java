@@ -2,24 +2,26 @@ package com.example.crudoperationinfirebasebyaqib;
 
 public class StdModel {
 
-    private String st_id ,name , email , phone , password;
+    private String st_id ,first_name ,last_name, email , username , password;
 
     public StdModel() {
     }
 
-    public StdModel(String st_id, String name, String email, String phone, String password) {
+    public StdModel(String st_id, String first_name, String last_name, String email, String username, String password) {
         this.st_id = st_id;
-        this.name = name;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
-        this.phone = phone;
+        this.username = username;
         this.password = password;
     }
 
-    public StdModel(String st_id, String name, String email, String phone) {
+    public StdModel(String st_id, String first_name, String last_name, String email, String username) {
         this.st_id = st_id;
-        this.name = name;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
-        this.phone = phone;
+        this.username = username;
     }
 
     public String getSt_id() {
@@ -30,12 +32,20 @@ public class StdModel {
         this.st_id = st_id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getEmail() {
@@ -46,12 +56,12 @@ public class StdModel {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

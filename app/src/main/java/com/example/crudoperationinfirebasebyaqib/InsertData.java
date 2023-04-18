@@ -3,13 +3,14 @@ package com.example.crudoperationinfirebasebyaqib;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,13 +27,15 @@ import java.util.Date;
 public class InsertData extends AppCompatActivity {
 
 
-    EditText name , email , phone , password;
+    EditText name , email , phone , password ,lname;
     Button add;
-    String Sname , Semail , Sphone , Spass , id;
+    String Sname , Semail , Sphone , Spass , id,Slname;
 
     DatabaseReference db ;
     FirebaseAuth mAuth;
     FirebaseUser user;
+
+    ProgressDialog dialog;
 
 
     @Override
@@ -49,12 +52,17 @@ public class InsertData extends AppCompatActivity {
         email = findViewById(R.id.edtemail);
         phone = findViewById(R.id.edtphone);
         password = findViewById(R.id.edtpass);
+        lname = findViewById(R.id.edtlname);
+
+        dialog = new ProgressDialog(this);
+        dialog.setTitle("Create User");
+        dialog.setMessage("please wait account is creating..!");
+
 
         add = findViewById(R.id.btn_insert);
 
         db = FirebaseDatabase.getInstance().getReference().child("Students_Info");
         mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
 
 
 
@@ -62,6 +70,7 @@ public class InsertData extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                dialog.show();
                 getValidations(view);
             }
         });
@@ -74,20 +83,36 @@ public class InsertData extends AppCompatActivity {
         Semail = email.getText().toString();
         Sphone = phone.getText().toString();
         Spass = password.getText().toString();
+        Slname = lname.getText().toString();
+
 //        id = "Student"+ new Date().getTime();
 
 
 
 
         if (Sname.isEmpty()){
-            Snackbar.make(view , "please enter your name " , Snackbar.LENGTH_LONG).show();
+            dialog.dismiss();
+            Snackbar.make(view , "please enter your first name " , Snackbar.LENGTH_LONG).show();
         } else if (Semail.isEmpty()) {
+            dialog.dismiss();
+
             Snackbar.make(view , "please enter your email " , Snackbar.LENGTH_LONG).show();
+        } else if (Slname.isEmpty()) {
+            dialog.dismiss();
+
+            Snackbar.make(view , "please enter your last name " , Snackbar.LENGTH_LONG).show();
         }else if (Sphone.isEmpty()) {
+            dialog.dismiss();
+
             Snackbar.make(view , "please enter your phone " , Snackbar.LENGTH_LONG).show();
         }else if (Spass.isEmpty()) {
+            dialog.dismiss();
+
             Snackbar.make(view , "please enter your password " , Snackbar.LENGTH_LONG).show();
-        }else {
+        }
+
+
+        else {
 
 
             mAuth.createUserWithEmailAndPassword(Semail,Spass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -96,9 +121,10 @@ public class InsertData extends AppCompatActivity {
 
 
                     if (task.isSuccessful()){
+                        user = mAuth.getCurrentUser();
                         id = user.getUid();
 
-                        StdModel model = new StdModel(id,Sname,Semail,Sphone,Spass);
+                        StdModel model = new StdModel(id,Sname,Slname,Semail,Sphone,Spass);
                         db.child(id).setValue(model);
                         Snackbar.make(view , "User Account created Successfully " , Snackbar.LENGTH_LONG).show();
                         Clear();
@@ -111,7 +137,7 @@ public class InsertData extends AppCompatActivity {
                                 Intent intent = new Intent(getApplicationContext(),Login_page.class);
                                 intent.putExtra("id",id);
                                 startActivity(intent);
-
+                                dialog.dismiss();
 
 
                             }
@@ -141,6 +167,7 @@ public class InsertData extends AppCompatActivity {
     private void Clear(){
 
         name.setText("");
+        lname.setText("");
         email.setText("");
         phone.setText("");
         password.setText("");

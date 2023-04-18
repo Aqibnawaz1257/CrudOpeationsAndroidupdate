@@ -11,7 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -40,10 +44,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
         StdModel stdModel = models.get(position);
 
-        holder.name.setText(stdModel.getName());
-        holder.email.setText(stdModel.getEmail());
-        holder.phone.setText(stdModel.getPhone());
-        holder.password.setText(stdModel.getPassword());
+        holder.name.setText(stdModel.getFirst_name());
+        holder.email.setText(stdModel.getLast_name());
+        holder.phone.setText(stdModel.getEmail());
+        holder.password.setText(stdModel.getUsername());
 
         holder.btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,10 +56,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 
                 intent.putExtra("id",stdModel.getSt_id());
-                intent.putExtra("name",stdModel.getName());
+                intent.putExtra("fname",stdModel.getFirst_name());
+                intent.putExtra("lname",stdModel.getLast_name());
                 intent.putExtra("email",stdModel.getEmail());
-                intent.putExtra("phone",stdModel.getPhone());
-                intent.putExtra("password",stdModel.getPassword());
+                intent.putExtra("username",stdModel.getUsername());
 
                 context.startActivity(intent);
 

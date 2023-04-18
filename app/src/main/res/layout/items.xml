@@ -31,7 +31,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/showemail"
             android:layout_marginTop="5dp"
-
             android:text="Name"
             />
 
@@ -40,7 +39,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/showphone"
             android:layout_marginTop="5dp"
-
             android:text="Name"
             />
         <TextView

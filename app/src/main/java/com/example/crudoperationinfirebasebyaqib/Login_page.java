@@ -41,6 +41,7 @@ public class Login_page extends AppCompatActivity {
     }
     public void regg(View view) {
         startActivity(new Intent(getApplicationContext(),InsertData.class));
+        finish();
     }
 
     private void init(){
@@ -49,7 +50,6 @@ public class Login_page extends AppCompatActivity {
         login = findViewById(R.id.btn_login);
 
         mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +67,7 @@ public class Login_page extends AppCompatActivity {
 
         if (Semail.equals("admin@gmail.com") && Spass.equals("123456")){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            finish();
         }
         if (Semail.isEmpty()) {
             Snackbar.make(view , "please enter your email " , Snackbar.LENGTH_LONG).show();
@@ -78,11 +79,14 @@ public class Login_page extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
 
+                        user = mAuth.getCurrentUser();
                         System.out.println(user.getUid());
-
+                        Clear();
                         Intent in= new Intent(getApplicationContext(),ViewProfile.class);
                         in.putExtra("uid",user.getUid());
                         startActivity(in);
+                        finish();
+
                     }
 
                 }
